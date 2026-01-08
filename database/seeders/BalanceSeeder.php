@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-
 use App\Models\Balance;
 use Illuminate\Database\Seeder;
 
@@ -13,6 +12,6 @@ class BalanceSeeder extends Seeder
      */
     public function run(): void
     {
-        Balance::firstOrCreate(['id' => 1], [ 'amount' => 0 ]);
+        Balance::firstOrCreate(['id' => 1], ['amount' => 0]);
     }
 }

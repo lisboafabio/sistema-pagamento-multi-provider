@@ -9,12 +9,9 @@ use App\Services\PaymentService;
 
 class PaymentController extends Controller
 {
-
     public function __construct(
-        readonly private PaymentService $paymentService,
-    )
-    {
-    }
+        private readonly PaymentService $paymentService,
+    ) {}
 
     public function store(PaymentRequest $request)
     {

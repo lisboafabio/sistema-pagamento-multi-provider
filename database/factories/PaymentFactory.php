@@ -24,13 +24,14 @@ class PaymentFactory extends Factory
         ];
     }
 
-    public function statusCreated(): self {
+    public function statusCreated(): self
+    {
         return $this->state(function (array $attributes) {
             return [
                 'provider' => PaymentProviderEnum::CHECKOUT_A,
                 'status' => PaymentStatusEnum::CREATED,
                 'method' => PaymentMethodEnum::CREDIT_CARD,
-                'amount' => 1000_00
+                'amount' => 1000_00,
             ];
         });
     }
