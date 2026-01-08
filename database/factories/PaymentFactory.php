@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Enums\PaymentMethodEnum;
+use App\Enums\PaymentProviderEnum;
+use App\Enums\PaymentStatusEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,5 +22,16 @@ class PaymentFactory extends Factory
         return [
             //
         ];
+    }
+
+    public function statusCreated(): self {
+        return $this->state(function (array $attributes) {
+            return [
+                'provider' => PaymentProviderEnum::CHECKOUT_A,
+                'status' => PaymentStatusEnum::CREATED,
+                'method' => PaymentMethodEnum::CREDIT_CARD,
+                'amount' => 1000_00
+            ];
+        });
     }
 }
