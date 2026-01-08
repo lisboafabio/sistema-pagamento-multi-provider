@@ -33,4 +33,11 @@ class PaymentController extends Controller
             return response()->json(['error' => $exception->getMessage()], 400);
         }
     }
+
+    public function getById(int $id)
+    {
+        $service = $this->paymentService->getById($id);
+
+        return response()->json($service?->toArray(), 200);
+    }
 }

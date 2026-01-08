@@ -12,4 +12,9 @@ class PaymentService
     {
         return $paymentProvider->createPayment($paymentDto);
     }
+
+    public function getById(int $id): Payment|null
+    {
+        return Payment::where('id', $id)->first();
+    }
 }
