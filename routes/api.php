@@ -18,6 +18,7 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'payment'
 ], function() {
-    Route::post('store', [PaymentController::class, 'store']);
+    Route::post('/', [PaymentController::class, 'store']);
+    Route::get('/{id}', [PaymentController::class, 'getById']);
 });
 

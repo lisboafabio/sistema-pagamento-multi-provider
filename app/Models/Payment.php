@@ -21,13 +21,12 @@ class Payment extends Model
         'amount',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'provider' => PaymentProviderEnum::class,
-            'status' => PaymentStatusEnum::class,
-            'method' => PaymentMethodEnum::class,
-        ];
-    }
+    protected $casts =
+    [
+        'provider' => PaymentProviderEnum::class,
+        'status' => PaymentStatusEnum::class,
+        'method' => PaymentMethodEnum::class,
+    ];
+
 
 }
