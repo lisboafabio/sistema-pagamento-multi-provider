@@ -69,7 +69,7 @@ class PaymentTest extends TestCase
     public function test_store_payment($paymentData, $expectedStatus): void
     {
         $this->actingAs(User::factory()->create())
-        ->post('/api/payment/store', $paymentData)
+        ->post('/api/payment', $paymentData)
         ->assertStatus(201)
             ->assertJsonStructure([
                 'id',
@@ -85,7 +85,7 @@ class PaymentTest extends TestCase
     public function test_fail_payment($paymentData): void
     {
         $this->actingAs(User::factory()->create())
-            ->post('/api/payment/store', $paymentData)
+            ->post('/api/payment', $paymentData)
             ->assertStatus(302);
     }
 }

@@ -52,7 +52,7 @@ class WebhookTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('payments', [
-            'amount' => PaymentStatusEnum::AUTHORIZED->value
+            'status' => PaymentStatusEnum::AUTHORIZED->value
         ]);
     }
 
