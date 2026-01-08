@@ -26,9 +26,6 @@ class AuthTest extends TestCase
         $this->seed(UserSeeder::class);
     }
 
-    /**
-     * A basic feature test example.
-     */
     public function test_user_login(): void
     {
         $this->post('/api/auth/login', $this->userData)

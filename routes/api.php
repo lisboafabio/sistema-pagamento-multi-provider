@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PaymentController;
 
 Route::group([
     'middleware' => 'api',
@@ -11,3 +12,12 @@ Route::group([
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::get('me', [AuthController::class, 'me']);
 });
+
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'payment'
+], function() {
+    Route::post('store', [PaymentController::class, 'store']);
+});
+
