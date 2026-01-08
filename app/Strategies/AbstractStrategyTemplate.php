@@ -9,10 +9,10 @@ use App\Models\Payment;
 
 class AbstractStrategyTemplate implements PaymentProviderInterface
 {
-
     public function createPayment(PaymentDto $paymentDto): Payment
     {
         $paymentDto->status = PaymentStatusEnum::CREATED;
+
         return Payment::create($paymentDto->toArray());
     }
 }

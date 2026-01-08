@@ -7,20 +7,18 @@ use App\Enums\PaymentProviderEnum;
 use App\Enums\PaymentStatusEnum;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class PaymentTest extends TestCase
 {
-
     use RefreshDatabase;
 
     public static function successPaymentProvider()
     {
         return [
             'CheckoutA data' => [
-                 [
+                [
                     'provider' => PaymentProviderEnum::CHECKOUT_B->value,
                     'method' => PaymentMethodEnum::CREDIT_CARD->value,
                     'amount' => 100_00,
@@ -28,13 +26,13 @@ class PaymentTest extends TestCase
                 PaymentStatusEnum::CREATED->value,
             ],
             'CheckoutB data' => [
-                 [
+                [
                     'provider' => PaymentProviderEnum::CHECKOUT_A->value,
                     'method' => PaymentMethodEnum::PIX->value,
                     'amount' => 100_00,
                 ],
                 PaymentStatusEnum::CREATED->value,
-            ]
+            ],
         ];
     }
 
@@ -69,8 +67,8 @@ class PaymentTest extends TestCase
     public function test_store_payment($paymentData, $expectedStatus): void
     {
         $this->actingAs(User::factory()->create())
-        ->post('/api/payment/store', $paymentData)
-        ->assertStatus(201)
+            ->post('/api/payment', $paymentData)
+            ->assertStatus(201)
             ->assertJsonStructure([
                 'id',
                 'provider',
@@ -85,7 +83,7 @@ class PaymentTest extends TestCase
     public function test_fail_payment($paymentData): void
     {
         $this->actingAs(User::factory()->create())
-            ->post('/api/payment/store', $paymentData)
+            ->post('/api/payment', $paymentData)
             ->assertStatus(302);
     }
 }

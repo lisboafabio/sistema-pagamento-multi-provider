@@ -4,10 +4,7 @@ namespace App\Listeners;
 
 use App\Enums\PaymentStatusEnum;
 use App\Events\RefundedPaymentEvent;
-use App\Events\RefusedPaymentEvent;
 use App\Models\Payment;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\DB;
 
 class RefundedPaymentListener

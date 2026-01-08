@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Enums\PaymentMethodEnum;
 use App\Enums\PaymentProviderEnum;
-use App\Enums\PaymentStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -29,7 +28,7 @@ class PaymentRequest extends FormRequest
             'amount' => [
                 'required',
                 'integer',
-                'min:1'
+                'min:1',
             ],
             'provider' => [
                 'required',

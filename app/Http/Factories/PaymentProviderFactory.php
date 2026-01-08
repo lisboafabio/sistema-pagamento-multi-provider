@@ -16,5 +16,4 @@ class PaymentProviderFactory
 
         return throw new \InvalidArgumentException("Class {$provider} does not exist");
     }
-
 }

@@ -7,13 +7,10 @@ use App\Events\AuthorizedPaymentEvent;
 use App\Models\Balance;
 use App\Models\Payment;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class AuthorizedPaymentListener implements ShouldQueue
 {
-
     /**
      * Create the event listener.
      */
@@ -41,7 +38,6 @@ class AuthorizedPaymentListener implements ShouldQueue
             $balance->amount += $payment->amount;
             $balance->save();
         });
-
 
     }
 }

@@ -14,6 +14,7 @@ class Payment extends Model
     use HasFactory;
 
     protected $table = 'payments';
+
     protected $fillable = [
         'provider',
         'status',
@@ -22,11 +23,9 @@ class Payment extends Model
     ];
 
     protected $casts =
-    [
-        'provider' => PaymentProviderEnum::class,
-        'status' => PaymentStatusEnum::class,
-        'method' => PaymentMethodEnum::class,
-    ];
-
-
+        [
+            'provider' => PaymentProviderEnum::class,
+            'status' => PaymentStatusEnum::class,
+            'method' => PaymentMethodEnum::class,
+        ];
 }

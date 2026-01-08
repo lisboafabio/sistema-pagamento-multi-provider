@@ -3,7 +3,6 @@
 namespace Tests\Unit;
 
 use App\Http\Factories\PaymentProviderFactory;
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -15,10 +14,10 @@ class PaymentProviderTest extends TestCase
     public static function classesListProvider(): array
     {
         return [
-           [
-               'CheckoutA',
-               'CheckoutB'
-           ]
+            [
+                'CheckoutA',
+                'CheckoutB',
+            ],
         ];
     }
 
@@ -26,8 +25,6 @@ class PaymentProviderTest extends TestCase
     public function test_payment_provider_factory($classesList): void
     {
         $factory = PaymentProviderFactory::handle($classesList);
-        $this->assertInstanceOf('App\Strategies\CheckoutA', $factory,'');
+        $this->assertInstanceOf('App\Strategies\CheckoutA', $factory, '');
     }
-
-
 }

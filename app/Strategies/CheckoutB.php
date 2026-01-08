@@ -2,6 +2,4 @@
 
 namespace App\Strategies;
 
-class CheckoutB extends AbstractStrategyTemplate
-{
-}
+class CheckoutB extends AbstractStrategyTemplate {}

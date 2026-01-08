@@ -5,10 +5,7 @@ namespace Tests\Feature;
 use App\Dto\WebhookDto;
 use App\Enums\PaymentStatusEnum;
 use App\Events\AuthorizedPaymentEvent;
-use App\Events\RefundedPaymentEvent;
 use App\Listeners\AuthorizedPaymentListener;
-use App\Listeners\CanceledPaymentListener;
-use App\Listeners\RefundedPaymentListener;
 use App\Models\Payment;
 use Database\Seeders\BalanceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -33,7 +30,7 @@ class WebhookTest extends TestCase
 
         $payload = [
             'payment_id' => $payment->id,
-            'payment_status' => $payment->status->value
+            'payment_status' => $payment->status->value,
         ];
 
         $webhookDto = WebhookDto::from($payload);
@@ -42,17 +39,17 @@ class WebhookTest extends TestCase
 
         $event = new AuthorizedPaymentEvent($webhookDto);
         event($event);
-        $listener = new AuthorizedPaymentListener();
+        $listener = new AuthorizedPaymentListener;
         $listener->handle($event);
 
         Event::assertDispatched(AuthorizedPaymentEvent::class);
 
         $this->assertDatabaseHas('balances', [
-           'amount' => $payment->amount
+            'amount' => $payment->amount,
         ]);
 
         $this->assertDatabaseHas('payments', [
-            'amount' => PaymentStatusEnum::AUTHORIZED->value
+            'status' => PaymentStatusEnum::AUTHORIZED->value,
         ]);
     }
 
@@ -62,17 +59,17 @@ class WebhookTest extends TestCase
             'Refused Event' => [
                 '\App\Events\RefusedPaymentEvent',
                 '\App\Listeners\RefusedPaymentListener',
-                PaymentStatusEnum::REFUSED
+                PaymentStatusEnum::REFUSED,
             ],
             'Canceled Event' => [
                 '\App\Events\CanceledPaymentEvent',
                 '\App\Listeners\CanceledPaymentListener',
-                PaymentStatusEnum::CANCELED
+                PaymentStatusEnum::CANCELED,
             ],
             'Refunded Event' => [
                 '\App\Events\RefundedPaymentEvent',
                 '\App\Listeners\RefundedPaymentListener',
-                PaymentStatusEnum::REFUNDED
+                PaymentStatusEnum::REFUNDED,
             ],
         ];
     }
@@ -85,7 +82,7 @@ class WebhookTest extends TestCase
 
         $payload = [
             'payment_id' => $payment->id,
-            'payment_status' => $enum->value
+            'payment_status' => $enum->value,
         ];
 
         $webhookDto = WebhookDto::from($payload);
@@ -94,15 +91,14 @@ class WebhookTest extends TestCase
 
         $event = new $event($webhookDto);
         event($event);
-        $listener = new $listener();
+        $listener = new $listener;
         $listener->handle($event);
 
         Event::assertDispatched($event::class);
 
         $this->assertDatabaseHas('payments', [
-            'status' => $enum
+            'status' => $enum,
         ]);
 
     }
-
 }

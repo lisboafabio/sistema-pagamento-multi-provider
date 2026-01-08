@@ -10,7 +10,10 @@ use Spatie\LaravelData\Data;
 class PaymentDto extends Data
 {
     public PaymentProviderEnum $provider;
+
     public PaymentStatusEnum $status;
+
     public PaymentMethodEnum $method;
+
     public int $amount;
 }
